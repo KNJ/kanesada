@@ -1,0 +1,22 @@
+{
+    "name": "wazly/kanesada",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "KNJ",
+            "email": "knj@wazly.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wazly\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
+    }
+}
