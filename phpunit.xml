@@ -26,4 +26,9 @@
       <directory>./tests/Kanesada</directory>
     </testsuite>
   </testsuites>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./src/Kanesada</directory>
+    </whitelist>
+  </filter>
 </phpunit>
