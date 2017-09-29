@@ -19,6 +19,11 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
+      # Xdebug
+      - run:
+          name: Getting Xdebug Enabled
+          command: sudo docker-php-ext-enable xdebug
+
       # PHP Unit
       - run:
           name: Running Unit Tests
