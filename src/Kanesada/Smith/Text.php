@@ -13,7 +13,7 @@ class Text
         $this->text = $text;
     }
 
-    static public function new(string $text = ''): Text
+    public static function new(string $text = ''): Text
     {
         return new static($text);
     }
@@ -21,7 +21,7 @@ class Text
     /**
      * Set alternative text.
      *
-     * @param string $text
+     * @param  string  $text
      * @return Text
      */
     public function set(string $text): Text
