@@ -24,7 +24,7 @@ final class SmithTextTest extends TestCase
 
     public function testConvertToString()
     {
-        $this->assertSame(self::INI_STR, (string)$this->text);
+        $this->assertSame(self::INI_STR, (string) $this->text);
     }
 
     public function testReplaceString()
