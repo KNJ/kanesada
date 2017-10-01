@@ -2,15 +2,19 @@
 
 namespace Wazly\Kanesada\Smith;
 
+use Wazly\Kanesada\Patch\DefaultTextRule;
+
 class Text
 {
     protected $baseText;
     protected $text;
+    protected $patchRule = DefaultTextRule::class;
 
     protected function __construct($text)
     {
         $this->baseText = $text;
         $this->text = $text;
+        $this->patch = new $this->patchRule;
     }
 
     public static function new(string $text = ''): Text
@@ -64,6 +68,19 @@ class Text
     public function dump(): string
     {
         return $this->text;
+    }
+
+    /**
+     * Apply patch rules to the text.
+     *
+     * @param  string $rules
+     * @return Text
+     */
+    public function apply(...$rules): Text
+    {
+        $this->text = $this->patch->apply($this->text, ...$rules);
+
+        return $this;
     }
 
     public function __toString()
