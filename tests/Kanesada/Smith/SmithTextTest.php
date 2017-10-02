@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wazly\Kanesada\Smith;
 
 use PHPUnit\Framework\TestCase;
+use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 final class SmithTextTest extends TestCase
 {
@@ -51,5 +52,11 @@ final class SmithTextTest extends TestCase
     {
         $this->assertSame(self::REP_STR, $text->flush());
         $this->assertSame(self::INI_STR, $text->dump());
+    }
+
+    public function testUndefinedMethod()
+    {
+        $this->expectException(UndefinedMethodException::class);
+        $this->text->und();
     }
 }

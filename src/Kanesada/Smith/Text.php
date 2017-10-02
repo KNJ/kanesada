@@ -3,6 +3,7 @@
 namespace Wazly\Kanesada\Smith;
 
 use Wazly\Kanesada\Patch\DefaultTextRule;
+use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 class Text
 {
@@ -81,6 +82,15 @@ class Text
         $this->text = $this->patch->apply($this->text, ...$rules);
 
         return $this;
+    }
+
+    public function __call($name, $args)
+    {
+        if (strpos($name, 'apply') === 0) {
+            return call_user_func([$this->patch, $name], array_merge([$this->text], $args));
+        }
+
+        throw new UndefinedMethodException(__CLASS__, $name);
     }
 
     public function __toString()
