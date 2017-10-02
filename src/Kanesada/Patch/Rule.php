@@ -37,7 +37,7 @@ abstract class Rule implements RuleInterface
 
     public function __call($name, $args): string
     {
-        /**
+        /*
          * Apply a patch rule with arguments.
          *
          * If an internal function "xxxx" (in "applyXxxx"), which is like "trim", can be
