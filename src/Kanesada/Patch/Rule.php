@@ -16,7 +16,7 @@ abstract class Rule implements RuleInterface
                     $rule[] = ucfirst($s);
                 }
                 $rule = implode('', $rule);
-                $method = 'apply' . $rule;
+                $method = 'apply'.$rule;
                 $text = $this->$method($text);
             }
         }
