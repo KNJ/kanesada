@@ -11,7 +11,7 @@ final class PatchTest extends TestCase
 {
     public function testCallPatch()
     {
-        $text = StubText::new('dummy text');
+        $text = StubTextForPatch::new('dummy text');
         $this->assertSame(
             'updated dummy text',
             $text->apply('dummy_rule')->dump()
@@ -19,7 +19,7 @@ final class PatchTest extends TestCase
     }
 }
 
-class StubText extends Text
+class StubTextForPatch extends Text
 {
     protected $patchRule = StubRule::class;
 }

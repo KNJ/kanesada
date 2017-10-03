@@ -11,7 +11,7 @@ final class ApplyRuleTest extends TestCase
 {
     public function setUp()
     {
-        $this->patch = new DefaultTextRule;
+        $this->patch = new TextRule;
     }
 
     public function testApplyNoSpacesRule()

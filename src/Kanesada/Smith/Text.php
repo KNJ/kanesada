@@ -2,20 +2,23 @@
 
 namespace Wazly\Kanesada\Smith;
 
-use Wazly\Kanesada\Patch\DefaultTextRule;
+use Wazly\Kanesada\Patch\TextRule;
+use Wazly\Kanesada\Validation\TextValidation;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 class Text
 {
     protected $baseText;
     protected $text;
-    protected $patchRule = DefaultTextRule::class;
+    protected $patchRule = TextRule::class;
+    protected $validator = TextValidation::class;
 
     protected function __construct($text)
     {
         $this->baseText = $text;
         $this->text = $text;
         $this->patch = new $this->patchRule;
+        $this->validator = new $this->validator;
     }
 
     public static function new(string $text = ''): Text
@@ -82,6 +85,16 @@ class Text
         $this->text = $this->patch->apply($this->text, ...$rules);
 
         return $this;
+    }
+
+    /**
+     * Validate the text.
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+        return $this->validator->isValid($this->text);
     }
 
     public function __call($name, $args)

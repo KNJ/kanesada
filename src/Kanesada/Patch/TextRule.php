@@ -2,7 +2,7 @@
 
 namespace Wazly\Kanesada\Patch;
 
-class DefaultTextRule extends Rule
+class TextRule extends Rule
 {
     protected function applyNoSpaces($text): string
     {
