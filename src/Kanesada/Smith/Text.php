@@ -2,8 +2,8 @@
 
 namespace Wazly\Kanesada\Smith;
 
-use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Patch\TextRule;
+use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Validation\TextValidation;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
@@ -24,6 +24,12 @@ class Text
         $this->validator = new $this->validator;
     }
 
+    /**
+     * Create new instance.
+     *
+     * @param  string $text
+     * @return Text
+     */
     public static function new(string $text = ''): Text
     {
         return new static($text);
