@@ -42,6 +42,14 @@ final class ApplyRuleTest extends TestCase
         );
     }
 
+    public function testOnlyLineFeedForNewlineRule()
+    {
+        $this->assertSame(
+            "Windows: \n, Classic Mac OS: \n, Linux: \n",
+            $this->patch->apply("Windows: \r\n, Classic Mac OS: \r, Linux: \n", 'only_line_feed_for_newline')
+        );
+    }
+
     public function testApplyTrimeRuleWithArgs()
     {
         $this->assertSame(
