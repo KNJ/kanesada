@@ -2,6 +2,7 @@
 
 namespace Wazly\Kanesada\Smith;
 
+use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Validation\TextValidation;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
@@ -10,6 +11,7 @@ class Text
 {
     protected $baseText;
     protected $text;
+    protected $extractor = TextExtractor::class;
     protected $patchRule = TextRule::class;
     protected $validator = TextValidation::class;
 
@@ -17,6 +19,7 @@ class Text
     {
         $this->baseText = $text;
         $this->text = $text;
+        $this->extractor = new $this->extractor;
         $this->patch = new $this->patchRule;
         $this->validator = new $this->validator;
     }
@@ -101,6 +104,8 @@ class Text
     {
         if (strpos($name, 'apply') === 0) {
             return call_user_func([$this->patch, $name], array_merge([$this->text], $args));
+        } elseif (strpos($name, 'get') === 0) {
+            return call_user_func_array([$this->extractor, $name], array_merge([$this->text], $args));
         }
 
         throw new UndefinedMethodException(__CLASS__, $name);
