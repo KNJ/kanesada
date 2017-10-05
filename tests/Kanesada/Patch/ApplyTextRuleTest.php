@@ -7,7 +7,7 @@ namespace Wazly\Kanesada\Patch;
 use PHPUnit\Framework\TestCase;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
-final class ApplyRuleTest extends TestCase
+final class ApplyTextRuleTest extends TestCase
 {
     public function setUp()
     {

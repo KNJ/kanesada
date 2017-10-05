@@ -30,7 +30,7 @@ class Text
      * @param  string $text
      * @return Text
      */
-    public static function new(string $text = ''): Text
+    public static function new(string $text = ''): self
     {
         return new static($text);
     }
@@ -41,7 +41,7 @@ class Text
      * @param  string  $text
      * @return Text
      */
-    public function set(string $text): Text
+    public function set(string $text): self
     {
         $this->text = $text;
 
@@ -53,7 +53,7 @@ class Text
      *
      * @return Text
      */
-    public function reset(): Text
+    public function reset(): self
     {
         $this->text = $this->baseText;
 
@@ -89,7 +89,7 @@ class Text
      * @param  string $rules
      * @return Text
      */
-    public function apply(...$rules): Text
+    public function apply(...$rules): self
     {
         $this->text = $this->patch->apply($this->text, ...$rules);
 
