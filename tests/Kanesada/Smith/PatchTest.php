@@ -14,7 +14,7 @@ final class PatchTest extends TestCase
         $text = StubTextForPatch::new('dummy text');
         $this->assertSame(
             'updated dummy text',
-            $text->apply('dummy_rule')->dump()
+            $text->apply('dummy_rule')->get()
         );
     }
 }

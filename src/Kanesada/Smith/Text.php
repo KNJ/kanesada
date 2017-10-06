@@ -61,7 +61,7 @@ class Text
     }
 
     /**
-     * Output the text and rollback to initial state.
+     * Get the text and rollback to initial state.
      *
      * @return string
      */
@@ -74,11 +74,11 @@ class Text
     }
 
     /**
-     * Output the current text.
+     * Get the current text.
      *
      * @return string
      */
-    public function dump(): string
+    public function get(): string
     {
         return $this->text;
     }
@@ -119,6 +119,6 @@ class Text
 
     public function __toString()
     {
-        return $this->dump();
+        return $this->get();
     }
 }

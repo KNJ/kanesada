@@ -18,9 +18,9 @@ final class SmithTextTest extends TestCase
         $this->text = Text::new($this->originalString);
     }
 
-    public function testDumpOriginalString()
+    public function testGetOriginalString()
     {
-        $this->assertSame(self::INI_STR, $this->text->dump());
+        $this->assertSame(self::INI_STR, $this->text->get());
     }
 
     public function testConvertToString()
@@ -31,7 +31,7 @@ final class SmithTextTest extends TestCase
     public function testReplaceString()
     {
         $this->text->set(self::REP_STR);
-        $this->assertSame(self::REP_STR, $this->text->dump());
+        $this->assertSame(self::REP_STR, $this->text->get());
 
         return $this->text;
     }
@@ -42,7 +42,7 @@ final class SmithTextTest extends TestCase
     public function testResetString(Text $text)
     {
         $text->reset();
-        $this->assertSame(self::INI_STR, $text->dump());
+        $this->assertSame(self::INI_STR, $text->get());
     }
 
     /**
@@ -51,7 +51,7 @@ final class SmithTextTest extends TestCase
     public function testFlushString(Text $text)
     {
         $this->assertSame(self::REP_STR, $text->flush());
-        $this->assertSame(self::INI_STR, $text->dump());
+        $this->assertSame(self::INI_STR, $text->get());
     }
 
     public function testUndefinedMethod()
