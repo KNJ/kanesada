@@ -17,4 +17,16 @@ final class ValidateTextTest extends TestCase
     {
         $this->assertTrue($this->validator->isValid('dummy text'));
     }
+
+    public function testHasLeadingSpace()
+    {
+        $this->assertTrue($this->validator->hasLeadingSpace(' This sentence has a leading space.'));
+        $this->assertFalse($this->validator->hasLeadingSpace('This sentence has a trailing space. '));
+    }
+
+    public function testHasTrailingSpace()
+    {
+        $this->assertFalse($this->validator->hasTrailingSpace(' This sentence has a leading space.'));
+        $this->assertTrue($this->validator->hasTrailingSpace('This sentence has a trailing space. '));
+    }
 }

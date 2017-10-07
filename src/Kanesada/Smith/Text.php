@@ -6,6 +6,7 @@ use Wazly\Kanesada\Tool;
 use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Validation\TextValidation;
+use Wazly\Kanesada\Exception\InvalidFormatException;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 class Text
@@ -33,7 +34,13 @@ class Text
      */
     public static function new(string $text = ''): self
     {
-        return new static($text);
+        $instance = new static($text);
+
+        if ($instance->validate() === false) {
+            throw new InvalidFormatException($text);
+        }
+
+        return $instance;
     }
 
     /**
