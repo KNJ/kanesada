@@ -19,6 +19,7 @@ final class Tool
         foreach ($words as $w) {
             $tmp[] = ucfirst($w);
         }
+
         return implode('', $tmp);
     }
 }
