@@ -2,6 +2,7 @@
 
 namespace Wazly\Kanesada\Smith;
 
+use Wazly\Kanesada\Tool;
 use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Validation\TextValidation;
@@ -61,25 +62,33 @@ class Text
     }
 
     /**
-     * Get the text and rollback to initial state.
+     * Get (a part of) the current text and rollback to initial state.
      *
-     * @return string
+     * @param  string $target
+     * @return mixed
      */
-    public function flush(): string
+    public function flush(string $target = '', ...$args)
     {
-        $text = $this->text;
+        $output = $this->get($target, ...$args);
         $this->reset();
 
-        return $text;
+        return $output;
     }
 
     /**
-     * Get the current text.
+     * Get (a part of) the current text.
      *
-     * @return string
+     * @param  string $target
+     * @return mixed
      */
-    public function get(): string
+    public function get(string $target = '', ...$args)
     {
+        if ($target !== '') {
+            $method = 'get'.Tool::upperCamelCase($target);
+
+            return $this->extractor->$method($this->text, ...$args);
+        }
+
         return $this->text;
     }
 
@@ -112,6 +121,11 @@ class Text
             return call_user_func([$this->patch, $name], array_merge([$this->text], $args));
         } elseif (strpos($name, 'get') === 0) {
             return call_user_func_array([$this->extractor, $name], array_merge([$this->text], $args));
+        } elseif (strpos($name, 'flush') === 0) {
+            $text = $this->text;
+            $this->reset();
+
+            return call_user_func_array([$this->extractor, 'get'.substr($name, 5)], array_merge([$text], $args));
         }
 
         throw new UndefinedMethodException(__CLASS__, $name);

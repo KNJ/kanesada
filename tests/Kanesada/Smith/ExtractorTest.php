@@ -14,7 +14,40 @@ final class ExtractorTest extends TestCase
         $text = StubTextForExtractor::new('dummy text');
         $this->assertSame(
             'ummy te',
+            $text->get('some_letters', 1, 7)
+        );
+        $this->assertSame(
+            'ummy te',
             $text->getSomeLetters(1, 7)
+        );
+        $this->assertSame(
+            'dummy text',
+            $text->get()
+        );
+    }
+
+    public function testCallExtractorAndFlush()
+    {
+        $text = StubTextForExtractor::new('dummy text');
+
+        $text->set('replaced text');
+        $this->assertSame(
+            'eplaced',
+            $text->flush('some_letters', 1, 7)
+        );
+        $this->assertSame(
+            'dummy text',
+            $text->get()
+        );
+
+        $text->set('another text');
+        $this->assertSame(
+            'nother ',
+            $text->flushSomeLetters(1, 7)
+        );
+        $this->assertSame(
+            'dummy text',
+            $text->get()
         );
     }
 }
