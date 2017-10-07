@@ -125,7 +125,9 @@ class Text
     public function __call($name, $args)
     {
         if (strpos($name, 'apply') === 0) {
-            return call_user_func([$this->patch, $name], array_merge([$this->text], $args));
+            $this->text = call_user_func_array([$this->patch, $name], array_merge([$this->text], $args));
+
+            return $this;
         } elseif (strpos($name, 'get') === 0) {
             return call_user_func_array([$this->extractor, $name], array_merge([$this->text], $args));
         } elseif (strpos($name, 'flush') === 0) {

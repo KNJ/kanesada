@@ -11,10 +11,16 @@ final class PatchTest extends TestCase
 {
     public function testCallPatch()
     {
-        $text = StubTextForPatch::new('dummy text');
+        $text1 = StubTextForPatch::new('dummy text');
         $this->assertSame(
             'updated dummy text',
-            $text->apply('dummy_rule')->get()
+            $text1->apply('dummy_rule')->get()
+        );
+
+        $text2 = StubTextForPatch::new('dummy text');
+        $this->assertSame(
+            'dummy text was updated',
+            $text2->applyDummyRule()->get()
         );
     }
 }
@@ -29,5 +35,10 @@ class StubRule implements RuleInterface
     public function apply(string $text, ...$rules): string
     {
         return 'updated dummy text';
+    }
+
+    public function applyDummyRule(): string
+    {
+        return 'dummy text was updated';
     }
 }
