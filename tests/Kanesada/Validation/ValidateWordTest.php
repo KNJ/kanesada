@@ -60,7 +60,6 @@ final class ValidateWordTest extends TestCase
 
         $this->assertFalse($validator2->isValid('dummy'));
 
-
         $validator3 = new class extends WordValidation {
             public function hasLeadingSpace(string $text): bool
             {
