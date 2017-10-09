@@ -9,12 +9,17 @@ class TextValidation implements ValidationInterface
         return true;
     }
 
-    public function hasLeadingSpace(string $text): bool
+    public function hasWhiteSpaces(string $text): bool
+    {
+        return preg_match('/\s/', $text);
+    }
+
+    public function hasLeadingWhiteSpace(string $text): bool
     {
         return preg_match('/^\s/', $text);
     }
 
-    public function hasTrailingSpace(string $text): bool
+    public function hasTrailingWhiteSpace(string $text): bool
     {
         return preg_match('/\s$/', $text);
     }

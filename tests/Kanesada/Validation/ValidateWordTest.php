@@ -16,12 +16,7 @@ final class ValidateWordTest extends TestCase
     public function testIsValid()
     {
         $validator = new class extends WordValidation {
-            public function hasLeadingSpace(string $text): bool
-            {
-                return false;
-            }
-
-            public function hasTrailingSpace(string $text): bool
+            public function hasWhiteSpaces(string $text): bool
             {
                 return false;
             }
@@ -32,46 +27,13 @@ final class ValidateWordTest extends TestCase
 
     public function testIsNotValid()
     {
-        $validator1 = new class extends WordValidation {
-            public function hasLeadingSpace(string $text): bool
-            {
-                return true;
-            }
-
-            public function hasTrailingSpace(string $text): bool
-            {
-                return false;
-            }
-        };
-
-        $this->assertFalse($validator1->isValid('dummy'));
-
-        $validator2 = new class extends WordValidation {
-            public function hasLeadingSpace(string $text): bool
-            {
-                return false;
-            }
-
-            public function hasTrailingSpace(string $text): bool
+        $validator = new class extends WordValidation {
+            public function hasWhiteSpaces(string $text): bool
             {
                 return true;
             }
         };
 
-        $this->assertFalse($validator2->isValid('dummy'));
-
-        $validator3 = new class extends WordValidation {
-            public function hasLeadingSpace(string $text): bool
-            {
-                return true;
-            }
-
-            public function hasTrailingSpace(string $text): bool
-            {
-                return true;
-            }
-        };
-
-        $this->assertFalse($validator3->isValid('dummy'));
+        $this->assertFalse($validator->isValid('dummy'));
     }
 }

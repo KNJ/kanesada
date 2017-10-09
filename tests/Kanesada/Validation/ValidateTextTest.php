@@ -18,15 +18,23 @@ final class ValidateTextTest extends TestCase
         $this->assertTrue($this->validator->isValid('dummy text'));
     }
 
-    public function testHasLeadingSpace()
+    public function testHasWhiteSpaces()
     {
-        $this->assertTrue($this->validator->hasLeadingSpace(' This sentence has a leading space.'));
-        $this->assertFalse($this->validator->hasLeadingSpace('This sentence has a trailing space. '));
+        $this->assertTrue($this->validator->hasWhiteSpaces('This sentence contains a space.'));
+        $this->assertTrue($this->validator->hasWhiteSpaces("This sentence contains a\ttab."));
+        $this->assertTrue($this->validator->hasWhiteSpaces("This sentence contains a\nnewline."));
+        $this->assertFalse($this->validator->hasWhiteSpaces('Thissentencecontainsnowhitespaces.'));
     }
 
-    public function testHasTrailingSpace()
+    public function testHasWhiteLeadingSpace()
     {
-        $this->assertFalse($this->validator->hasTrailingSpace(' This sentence has a leading space.'));
-        $this->assertTrue($this->validator->hasTrailingSpace('This sentence has a trailing space. '));
+        $this->assertTrue($this->validator->hasLeadingWhiteSpace(' This sentence has a leading white space.'));
+        $this->assertFalse($this->validator->hasLeadingWhiteSpace('This sentence has a trailing white space. '));
+    }
+
+    public function testHasTrailingWhiteSpace()
+    {
+        $this->assertFalse($this->validator->hasTrailingWhiteSpace(' This sentence has a leading white space.'));
+        $this->assertTrue($this->validator->hasTrailingWhiteSpace('This sentence has a trailing white space. '));
     }
 }
