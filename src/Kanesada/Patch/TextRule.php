@@ -2,6 +2,8 @@
 
 namespace Wazly\Kanesada\Patch;
 
+use Wazly\Kanesada\Tool;
+
 class TextRule extends Rule
 {
     protected function applyNoSpaces($text): string
@@ -11,6 +13,6 @@ class TextRule extends Rule
 
     protected function applyOnlyLineFeedForNewline($text): string
     {
-        return str_replace(["\r\n", "\r"], ["\n", "\n"], $text);
+        return Tool::lineFeed($text);
     }
 }

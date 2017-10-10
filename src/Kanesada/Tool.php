@@ -12,6 +12,11 @@ final class Tool
         //
     }
 
+    public static function lineFeed(string $text): string
+    {
+        return str_replace(["\r\n", "\r"], ["\n", "\n"], $text);
+    }
+
     public static function upperCamelCase(string $text): string
     {
         $tmp = [];

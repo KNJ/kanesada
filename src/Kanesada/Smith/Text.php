@@ -27,6 +27,8 @@ class Text
     }
 
     /**
+     * [Smithing]
+     *
      * Create new instance.
      *
      * @param  string $text
@@ -44,7 +46,9 @@ class Text
     }
 
     /**
-     * Set alternative text.
+     * [Smithing]
+     *
+     * Set an alternative text.
      *
      * @param  string  $text
      * @return Text
@@ -57,6 +61,8 @@ class Text
     }
 
     /**
+     * [Smithing]
+     *
      * Rollback the text to initial state.
      *
      * @return Text
@@ -69,6 +75,8 @@ class Text
     }
 
     /**
+     * [Smithing]
+     *
      * Get (a part of) the current text and rollback to initial state.
      *
      * @param  string $target
@@ -83,6 +91,22 @@ class Text
     }
 
     /**
+     * [Property]
+     *
+     * Return the number of lines in the text.
+     *
+     * @return int
+     */
+    public function countLines(): int
+    {
+        $text = Tool::lineFeed($this->text);
+
+        return 1 + mb_substr_count($text, "\n");
+    }
+
+    /**
+     * [Extraction]
+     *
      * Get (a part of) the current text.
      *
      * @param  string $target
@@ -100,6 +124,8 @@ class Text
     }
 
     /**
+     * [Patch]
+     *
      * Apply patch rules to the text.
      *
      * @param  string $rules
@@ -113,6 +139,8 @@ class Text
     }
 
     /**
+     * [Validation]
+     *
      * Validate the text.
      *
      * @return bool

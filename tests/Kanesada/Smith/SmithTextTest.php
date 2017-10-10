@@ -28,7 +28,7 @@ final class SmithTextTest extends TestCase
         $this->assertSame(self::INI_STR, (string) $this->text);
     }
 
-    public function testReplaceString()
+    public function testReplaceString(): Text
     {
         $this->text->set(self::REP_STR);
         $this->assertSame(self::REP_STR, $this->text->get());
