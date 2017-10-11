@@ -2,6 +2,7 @@
 
 namespace Wazly\Kanesada\Smith;
 
+use BadMethodCallException;
 use Wazly\Kanesada\Tool;
 use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Extractor\TextExtractor;
@@ -88,6 +89,31 @@ class Text
         $this->reset();
 
         return $output;
+    }
+
+    /**
+     * [Smithing]
+     *
+     * @param  mixed $args
+     * @return mixed
+     */
+    public function replace(...$args): self
+    {
+        if (! isset($args[0])) {
+            throw new BadMethodCallException('No arguments to function '.__CLASS__.'::replace()');
+        }
+
+        if (is_string($args[0])) {
+            if (! isset($args[1])) {
+                throw new BadMethodCallException('Missing one more argument to function '.__CLASS__.'::replace()');
+            } elseif (! is_string($args[1])) {
+                throw new BadMethodCallException('Argument 2 passed to function '.__CLASS__.'::replace() is not string');
+            }
+
+            $this->text = str_replace($args[0], $args[1], $this->text);
+        }
+
+        return $this;
     }
 
     /**

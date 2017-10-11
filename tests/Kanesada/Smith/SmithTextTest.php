@@ -28,7 +28,7 @@ final class SmithTextTest extends TestCase
         $this->assertSame(self::INI_STR, (string) $this->text);
     }
 
-    public function testReplaceString(): Text
+    public function testSetString(): Text
     {
         $this->text->set(self::REP_STR);
         $this->assertSame(self::REP_STR, $this->text->get());
@@ -36,8 +36,21 @@ final class SmithTextTest extends TestCase
         return $this->text;
     }
 
+    public function testReplaceString()
+    {
+        $this->assertInstanceOf(
+            Text::class,
+            $this->text->replace('other men', 'others')
+        );
+
+        $this->assertSame(
+            'Anything one man can imagine, others can make real.',
+            $this->text->get()
+        );
+    }
+
     /**
-     * @depends clone testReplaceString
+     * @depends clone testSetString
      */
     public function testResetString(Text $text)
     {
@@ -46,7 +59,7 @@ final class SmithTextTest extends TestCase
     }
 
     /**
-     * @depends clone testReplaceString
+     * @depends clone testSetString
      */
     public function testFlushString(Text $text)
     {
