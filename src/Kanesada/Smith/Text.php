@@ -2,8 +2,8 @@
 
 namespace Wazly\Kanesada\Smith;
 
-use BadMethodCallException;
 use Wazly\Kanesada\Tool;
+use BadMethodCallException;
 use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Validation\TextValidation;
@@ -29,7 +29,6 @@ class Text
 
     /**
      * [Smithing]
-     *
      * Create new instance.
      *
      * @param  string $text
@@ -48,7 +47,6 @@ class Text
 
     /**
      * [Smithing]
-     *
      * Set an alternative text.
      *
      * @param  string  $text
@@ -63,7 +61,6 @@ class Text
 
     /**
      * [Smithing]
-     *
      * Rollback the text to initial state.
      *
      * @return Text
@@ -77,7 +74,6 @@ class Text
 
     /**
      * [Smithing]
-     *
      * Get (a part of) the current text and rollback to initial state.
      *
      * @param  string $target
@@ -93,6 +89,7 @@ class Text
 
     /**
      * [Smithing]
+     * Replace some parts of the current text.
      *
      * @param  mixed $args
      * @return mixed
@@ -118,7 +115,6 @@ class Text
 
     /**
      * [Property]
-     *
      * Return the number of lines in the text.
      *
      * @return int
@@ -132,7 +128,6 @@ class Text
 
     /**
      * [Extraction]
-     *
      * Get (a part of) the current text.
      *
      * @param  string $target
@@ -151,7 +146,6 @@ class Text
 
     /**
      * [Patch]
-     *
      * Apply patch rules to the text.
      *
      * @param  string $rules
@@ -166,7 +160,6 @@ class Text
 
     /**
      * [Validation]
-     *
      * Validate the text.
      *
      * @return bool
