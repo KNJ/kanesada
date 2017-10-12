@@ -77,7 +77,7 @@ class Text
      * Get (a part of) the current text and rollback to initial state.
      *
      * @param  string $target
-     * @return mixed
+     * @return string
      */
     public function flush(string $target = '', ...$args)
     {
@@ -92,7 +92,7 @@ class Text
      * Replace some parts of the current text.
      *
      * @param  mixed $args
-     * @return mixed
+     * @return Text
      */
     public function replace(...$args): self
     {
@@ -114,6 +114,19 @@ class Text
     }
 
     /**
+     * [Smithing]
+     * Output the current text with a newline.
+     *
+     * @param  string $target
+     * @param  mixed  $args
+     * @return void
+     */
+    public function println(string $target = '', ...$args)
+    {
+        echo $this->get($target, ...$args).PHP_EOL;
+    }
+
+    /**
      * [Property]
      * Return the number of lines in the text.
      *
@@ -131,9 +144,10 @@ class Text
      * Get (a part of) the current text.
      *
      * @param  string $target
-     * @return mixed
+     * @param  mixed  $args
+     * @return string
      */
-    public function get(string $target = '', ...$args)
+    public function get(string $target = '', ...$args): string
     {
         if ($target !== '') {
             $method = 'get'.Tool::upperCamelCase($target);

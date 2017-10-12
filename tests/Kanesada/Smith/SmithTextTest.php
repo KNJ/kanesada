@@ -67,9 +67,29 @@ final class SmithTextTest extends TestCase
         $this->assertSame(self::INI_STR, $text->get());
     }
 
+    public function testPrintln()
+    {
+        $this->text = StubText::new();
+        ob_start();
+        $this->text->println();
+        $output = ob_get_clean();
+        $this->assertSame(
+            'dummy text'.PHP_EOL,
+            $output
+        );
+    }
+
     public function testUndefinedMethod()
     {
         $this->expectException(UndefinedMethodException::class);
         $this->text->und();
+    }
+}
+
+class StubText extends Text
+{
+    public function get(string $target = '', ...$args): string
+    {
+        return 'dummy text';
     }
 }
