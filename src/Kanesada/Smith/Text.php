@@ -100,7 +100,7 @@ class Text
             throw new BadMethodCallException('No arguments to function '.__CLASS__.'::replace()');
         }
 
-        if (is_string($args[0])) {
+        if (is_string($args[0]) || is_array($args[0])) {
             if (! isset($args[1])) {
                 throw new BadMethodCallException('Missing one more argument to function '.__CLASS__.'::replace()');
             } elseif (! is_string($args[1])) {
@@ -111,6 +111,19 @@ class Text
         }
 
         return $this;
+    }
+
+    /**
+     * [Smithing]
+     * Split the text by explode().
+     *
+     * @param  string $delimiter
+     * @param  int    $limit
+     * @return array
+     */
+    public function explode(string $delimiter, int $limit = PHP_INT_MAX): array
+    {
+        return explode($delimiter, $this->text, $limit);
     }
 
     /**

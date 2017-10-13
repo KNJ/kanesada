@@ -36,16 +36,37 @@ final class SmithTextTest extends TestCase
         return $this->text;
     }
 
-    public function testReplaceString()
+    public function testReplaceOneWithOneString()
     {
         $this->assertInstanceOf(
             Text::class,
-            $this->text->replace('other men', 'others')
+            $this->text->replace('can', 'will')
         );
 
         $this->assertSame(
-            'Anything one man can imagine, others can make real.',
+            'Anything one man will imagine, other men will make real.',
             $this->text->get()
+        );
+    }
+
+    public function testReplaceManyWithOneString()
+    {
+        $this->assertInstanceOf(
+            Text::class,
+            $this->text->replace(['man', 'men'], 'fish')
+        );
+
+        $this->assertSame(
+            'Anything one fish can imagine, other fish can make real.',
+            $this->text->get()
+        );
+    }
+
+    public function testExplodeString()
+    {
+        $this->assertSame(
+            ['Anything', 'one', 'man', 'can', 'imagine,', 'other', 'men', 'can', 'make', 'real.'],
+            $this->text->explode(' ')
         );
     }
 
