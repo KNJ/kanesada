@@ -61,6 +61,34 @@ class Text
 
     /**
      * [Smithing]
+     * Add your text to the biginning of the text.
+     *
+     * @param  string $text
+     * @return Text
+     */
+    public function prepend(string $text): self
+    {
+        $this->text = $text.$this->text;
+
+        return $this;
+    }
+
+    /**
+     * [Smithing]
+     * Add your text to the end of the text.
+     *
+     * @param  string $text
+     * @return Text
+     */
+    public function append(string $text): self
+    {
+        $this->text = $this->text.$text;
+
+        return $this;
+    }
+
+    /**
+     * [Smithing]
      * Rollback the text to initial state.
      *
      * @return Text

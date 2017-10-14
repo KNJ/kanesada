@@ -36,6 +36,30 @@ final class SmithTextTest extends TestCase
         return $this->text;
     }
 
+    public function testPrependString()
+    {
+        $this->assertInstanceOf(
+            Text::class,
+            $this->text->prepend('1. ')
+        );
+        $this->assertSame(
+            '1. Anything one man can imagine, other men can make real.',
+            $this->text->get()
+        );
+    }
+
+    public function testAppendString()
+    {
+        $this->assertInstanceOf(
+            Text::class,
+            $this->text->append('..')
+        );
+        $this->assertSame(
+            'Anything one man can imagine, other men can make real...',
+            $this->text->get()
+        );
+    }
+
     public function testReplaceOneWithOneString()
     {
         $this->assertInstanceOf(
