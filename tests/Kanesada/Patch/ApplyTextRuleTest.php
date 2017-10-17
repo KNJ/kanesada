@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wazly\Kanesada\Patch;
 
+use Mockery;
 use PHPUnit\Framework\TestCase;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
@@ -42,11 +43,33 @@ final class ApplyTextRuleTest extends TestCase
         );
     }
 
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testOnlyLineFeedForNewlineRule()
     {
+        $tool = Mockery::mock('alias:Wazly\Kanesada\Tool');
+        $tool->shouldReceive('lineFeed')->andReturn("Windows: \n, Classic Mac OS: \n, Linux: \n");
+
         $this->assertSame(
             "Windows: \n, Classic Mac OS: \n, Linux: \n",
             $this->patch->apply("Windows: \r\n, Classic Mac OS: \r, Linux: \n", 'only_line_feed_for_newline')
+        );
+    }
+
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function testNoNewLinesRule()
+    {
+        $tool = Mockery::mock('alias:Wazly\Kanesada\Tool');
+        $tool->shouldReceive('lineFeed')->andReturn('Windows: , Classic Mac OS: , Linux: ');
+
+        $this->assertSame(
+            'Windows: , Classic Mac OS: , Linux: ',
+            $this->patch->apply("Windows: \r\n, Classic Mac OS: \r, Linux: \n", 'no_new_lines')
         );
     }
 
