@@ -16,7 +16,7 @@ class TextRule extends Rule
         return Tool::lineFeed($text);
     }
 
-    protected function applyNoNewLines($text): string
+    protected function applyNoNewlines($text): string
     {
         $text = Tool::lineFeed($text);
 

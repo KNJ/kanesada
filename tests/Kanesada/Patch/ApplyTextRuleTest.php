@@ -62,14 +62,14 @@ final class ApplyTextRuleTest extends TestCase
      * @runInSeparateProcess
      * @preserveGlobalState disabled
      */
-    public function testNoNewLinesRule()
+    public function testNoNewlinesRule()
     {
         $tool = Mockery::mock('alias:Wazly\Kanesada\Tool');
         $tool->shouldReceive('lineFeed')->andReturn('Windows: , Classic Mac OS: , Linux: ');
 
         $this->assertSame(
             'Windows: , Classic Mac OS: , Linux: ',
-            $this->patch->apply("Windows: \r\n, Classic Mac OS: \r, Linux: \n", 'no_new_lines')
+            $this->patch->apply("Windows: \r\n, Classic Mac OS: \r, Linux: \n", 'no_newlines')
         );
     }
 
