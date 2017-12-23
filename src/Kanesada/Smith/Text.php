@@ -18,13 +18,18 @@ class Text
     protected $patchRule = TextRule::class;
     protected $validator = TextValidation::class;
 
-    protected function __construct($text)
+    protected function __construct(string $text)
     {
         $this->baseText = $text;
         $this->text = $text;
-        $this->extractor = new $this->extractor;
         $this->patch = new $this->patchRule;
         $this->validator = new $this->validator;
+        $this->extractor = $this->createExtractor();
+    }
+
+    protected function createExtractor()
+    {
+        return new $this->extractor;
     }
 
     /**
@@ -178,6 +183,24 @@ class Text
         $text = Tool::lineFeed($this->text);
 
         return 1 + mb_substr_count($text, "\n");
+    }
+
+    /**
+     * [Property]
+     * Return if the current text contains specific text.
+     *
+     * @param  string  $text
+     * @return boolean
+     */
+    public function has(string $text): bool
+    {
+        $result = mb_strpos($this->text, $text);
+
+        if ($result === false) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
