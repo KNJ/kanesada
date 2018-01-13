@@ -8,6 +8,7 @@ use Wazly\Kanesada\Patch\TextRule;
 use Wazly\Kanesada\Extractor\TextExtractor;
 use Wazly\Kanesada\Validation\TextValidation;
 use Wazly\Kanesada\Exception\InvalidFormatException;
+use Wazly\Kanesada\Exception\StringNotFoundException;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 class Text
@@ -88,6 +89,23 @@ class Text
     public function append(string $text): self
     {
         $this->text = $this->text.$text;
+
+        return $this;
+    }
+
+    /**
+     * [Smithing]
+     * Delete a line.
+     *
+     * @param  int  $index
+     * @return Text
+     */
+    public function deleteLine(int $index): self
+    {
+        $text = Tool::lineFeed($this->text);
+        $lines = explode("\n", $text);
+        unset($lines[$index]);
+        $this->text = implode("\n", $lines);
 
         return $this;
     }
@@ -201,6 +219,28 @@ class Text
         }
 
         return true;
+    }
+
+    /**
+     * [Property]
+     * Find position of first occurrence of specific text in the current text.
+     *
+     * @param  string $text
+     * @throws StringNotFoundException
+     * @return array
+     */
+    public function position(string $text): array
+    {
+        $lines = explode("\n", Tool::lineFeed($this->text));
+
+        foreach ($lines as $y => $line) {
+            $x = mb_strpos($line, $text);
+            if ($x !== false) {
+                return [$x, $y];
+            }
+        }
+
+        throw new StringNotFoundException($text);
     }
 
     /**

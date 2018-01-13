@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace Wazly\Kanesada\Smith;
 
 use PHPUnit\Framework\TestCase;
+use Wazly\Kanesada\Exception\StringNotFoundException;
 use Wazly\Kanesada\Exception\UndefinedMethodException;
 
 final class SmithTextTest extends TestCase
 {
     const INI_STR = 'Anything one man can imagine, other men can make real.';
     const REP_STR = 'Done is better than perfect.';
+    const MUL_STR = <<< EOL
+12345
+67891
+01112
+13141
+51617
+EOL;
 
     public function setUp()
     {
@@ -91,6 +99,40 @@ final class SmithTextTest extends TestCase
         $this->assertSame(
             ['Anything', 'one', 'man', 'can', 'imagine,', 'other', 'men', 'can', 'make', 'real.'],
             $this->text->explode(' ')
+        );
+    }
+
+    public function testFindPosition()
+    {
+        $this->text->set(self::MUL_STR);
+        $this->assertSame(
+            [1, 1],
+            $this->text->position('7')
+        );
+        $this->assertSame(
+            [1, 3],
+            $this->text->position('31')
+        );
+    }
+
+    public function testFindNoPosition()
+    {
+        $this->expectException(StringNotFoundException::class);
+        $this->text->position('pos');
+    }
+
+    public function testDeleteSingleLine()
+    {
+        $deleted = <<< EOL
+12345
+67891
+13141
+51617
+EOL;
+        $this->text->set(self::MUL_STR);
+        $this->assertSame(
+            $deleted,
+            $this->text->deleteLine(2)->get()
         );
     }
 
