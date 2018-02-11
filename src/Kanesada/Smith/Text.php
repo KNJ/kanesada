@@ -208,7 +208,7 @@ class Text
      * Return if the current text contains specific text.
      *
      * @param  string  $text
-     * @return boolean
+     * @return bool
      */
     public function has(string $text): bool
     {

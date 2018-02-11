@@ -11,7 +11,7 @@ final class SmithTextTest extends TestCase
 {
     const INI_STR = 'Anything one man can imagine, other men can make real.';
     const REP_STR = 'Done is better than perfect.';
-    const MUL_STR = <<< EOL
+    const MUL_STR = <<< 'EOL'
 12345
 67891
 01112
@@ -103,7 +103,7 @@ EOL;
 
     public function testDeleteSingleLine()
     {
-        $deleted = <<< EOL
+        $deleted = <<< 'EOL'
 12345
 67891
 13141

@@ -9,7 +9,7 @@ use Wazly\Kanesada\Exception\StringNotFoundException;
 
 final class GetTextPropertyTest extends TestCase
 {
-    const MUL_STR = <<< EOL
+    const MUL_STR = <<< 'EOL'
 12345
 67891
 01112
